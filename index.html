@@ -246,11 +246,13 @@
         }
     </script>
 <script>
-    fetch('https://ipapi.co/country_name/')
-    .then(res => res.text())
-    .then(pais => {
-        fetch(`https://PAULOCORREA.pythonanywhere.com/registrar?pais=${pais}`);
-    });
+    fetch('https://ipapi.co/json/')
+    .then(res => res.json())
+    .then(data => {
+        // Envia o país do visitante para o seu servidor no PythonAnywhere
+        fetch(`https://PAULOCORREA.pythonanywhere.com/registrar?pais=${data.country_name}`);
+    })
+    .catch(err => console.log("Erro ao registrar visita"));
 </script>
 </body>
 </html>
