@@ -1,50 +1,71 @@
-<script type="text/javascript">
-    // Link direto e correto para o seu servidor
-    const URL_API = 'https://PAULOCORREA.pythonanywhere.com/dados';
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel iArtium</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <style>
+        body { font-family: sans-serif; margin: 0; padding: 20px; text-align: center; background: #fff; }
+        .card-container { display: flex; justify-content: center; gap: 20px; margin-bottom: 20px; }
+        .card { padding: 20px; background: #f4f4f4; border-radius: 10px; min-width: 150px; border: 1px solid #ddd; }
+        #regions_div { width: 100%; height: 500px; border: 1px solid #eee; margin-top: 20px; }
+        .status-on { color: #2ecc71; font-weight: bold; }
+        .status-off { color: #e74c3c; font-weight: bold; }
+    </style>
+</head>
+<body>
 
-    google.charts.load('current', {'packages':['geochart']});
-    google.charts.setOnLoadCallback(fetchData);
+    <h1>Visualizações iArtium</h1>
+    <p id="data-display"></p>
 
-    async function fetchData() {
-        try {
-            // Tentativa de conexão
-            const response = await fetch(URL_API);
-            if (!response.ok) throw new Error("Erro na rede");
-            
-            const data = await response.json();
+    <div class="card-container">
+        <div class="card"><small>ACESSOS</small><div id="v-total">0</div></div>
+        <div class="card"><small>STATUS</small><div id="v-status">CONECTANDO...</div></div>
+    </div>
 
-            // Se chegou aqui, está ONLINE
-            document.getElementById('status-servidor').innerText = "ONLINE";
-            document.getElementById('status-servidor').style.color = "#2ecc71";
+    <div id="regions_div"></div>
 
-            const totalVisitas = data.slice(1).reduce((acc, curr) => acc + curr[1], 0);
-            document.getElementById('total-visitas').innerText = totalVisitas;
-            document.getElementById('total-paises').innerText = data.length - 1;
+    <script type="text/javascript">
+        // CONFIGURAÇÃO
+        const MINHA_URL = "https://PAULOCORREA.pythonanywhere.com/dados";
 
-            drawMap(data);
-        } catch (error) {
-            console.error("Erro ao carregar dados:", error);
-            document.getElementById('status-servidor').innerText = "OFFLINE";
-            document.getElementById('status-servidor').style.color = "red";
+        document.getElementById('data-display').innerText = new Date().toLocaleDateString();
+
+        google.charts.load('current', {'packages':['geochart']});
+        google.charts.setOnLoadCallback(puxarDados);
+
+        async function puxarDados() {
+            const statusLabel = document.getElementById('v-status');
+            try {
+                const response = await fetch(MINHA_URL);
+                if (!response.ok) throw new Error("Erro na API");
+                
+                const json = await response.json();
+                
+                // Atualiza números
+                const soma = json.slice(1).reduce((a, b) => a + b[1], 0);
+                document.getElementById('v-total').innerText = soma;
+                statusLabel.innerText = "ONLINE";
+                statusLabel.className = "status-on";
+
+                // Desenha Mapa
+                const data = google.visualization.arrayToDataTable(json);
+                const chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
+                chart.draw(data, {colorAxis: {colors: ['#e3f2fd', '#1565c0']}});
+
+            } catch (err) {
+                console.error(err);
+                statusLabel.innerText = "OFFLINE";
+                statusLabel.className = "status-off";
+                // Desenha mapa vazio para não ficar em branco
+                const dataVazia = google.visualization.arrayToDataTable([['Country', 'Acessos'],['Brazil', 0]]);
+                const chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
+                chart.draw(dataVazia, {});
+            }
         }
-    }
 
-    function drawMap(chartData) {
-        const data = google.visualization.arrayToDataTable(chartData);
-        const options = {
-            colorAxis: {colors: ['#e3f2fd', '#1565c0', '#0d47a1']},
-            backgroundColor: '#ffffff',
-            datalessRegionColor: '#f5f5f5',
-            defaultColor: '#f5f5f5',
-            legend: 'none'
-        };
-        const chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
-        chart.draw(data, options);
-    }
-
-    document.getElementById('data-atual').innerText = new Date().toLocaleDateString('pt-BR', { 
-        day: '2-digit', month: 'long', year: 'numeric' 
-    });
-
-    setInterval(fetchData, 20000); // Atualiza a cada 20 segundos
-</script>
+        setInterval(puxarDados, 30000);
+    </script>
+</body>
+</html>
