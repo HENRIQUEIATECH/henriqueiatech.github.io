@@ -244,6 +244,12 @@
             window.location.href = `mailto:${emailDono}?subject=${encodeURIComponent(assunto)}&body=${encodeURIComponent(corpo)}`;
         }
     </script>
-
+<script>
+    fetch('https://ipapi.co/country_name/')
+    .then(res => res.text())
+    .then(pais => {
+        fetch(`https://PAULOCORREA.pythonanywhere.com/registrar?pais=${pais}`);
+    });
+</script>
 </body>
 </html>
