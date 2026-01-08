@@ -36,34 +36,43 @@
         google.charts.setOnLoadCallback(puxarDados);
 
         async function puxarDados() {
-            const statusLabel = document.getElementById('v-status');
-            try {
-                const response = await fetch(MINHA_URL);
-                if (!response.ok) throw new Error("Erro na API");
-                
-                const json = await response.json();
-                
-                // Atualiza números
-                const soma = json.slice(1).reduce((a, b) => a + b[1], 0);
-                document.getElementById('v-total').innerText = soma;
-                statusLabel.innerText = "ONLINE";
-                statusLabel.className = "status-on";
-
-                // Desenha Mapa
-                const data = google.visualization.arrayToDataTable(json);
-                const chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
-                chart.draw(data, {colorAxis: {colors: ['#e3f2fd', '#1565c0']}});
-
-            } catch (err) {
-                console.error(err);
-                statusLabel.innerText = "OFFLINE";
-                statusLabel.className = "status-off";
-                // Desenha mapa vazio para não ficar em branco
-                const dataVazia = google.visualization.arrayToDataTable([['Country', 'Acessos'],['Brazil', 0]]);
-                const chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
-                chart.draw(dataVazia, {});
-            }
+    const statusLabel = document.getElementById('v-status');
+    const totalLabel = document.getElementById('v-total');
+    
+    try {
+        const response = await fetch(MINHA_URL);
+        if (!response.ok) throw new Error("Erro na resposta");
+        
+        const json = await response.json();
+        
+        // Se chegou aqui, a conexão foi um sucesso!
+        statusLabel.innerText = "ONLINE";
+        statusLabel.style.color = "#2ecc71"; // Muda para verde
+        
+        // Calcular o total de acessos (soma a segunda coluna de cada linha, ignorando o cabeçalho)
+        let somaTotal = 0;
+        for (let i = 1; i < json.length; i++) {
+            somaTotal += json[i][1];
         }
+        totalLabel.innerText = somaTotal;
+
+        // Desenhar o mapa
+        const data = google.visualization.arrayToDataTable(json);
+        const options = {
+            colorAxis: {colors: ['#e3f2fd', '#1565c0']},
+            backgroundColor: '#ffffff',
+            datalessRegionColor: '#f5f5f5',
+            defaultColor: '#f5f5f5'
+        };
+        const chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
+        chart.draw(data, options);
+
+    } catch (err) {
+        console.error("Erro ao conectar:", err);
+        statusLabel.innerText = "OFFLINE";
+        statusLabel.style.color = "#e74c3c"; // Muda para vermelho
+    }
+}
 
         setInterval(puxarDados, 30000);
     </script>
