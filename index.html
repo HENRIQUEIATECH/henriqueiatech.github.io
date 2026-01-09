@@ -134,6 +134,39 @@
     text-decoration: none; border-radius: 50px; transition: 0.3s;
 }
 .btn-investir:hover { background: #fff; transform: scale(1.05); }
+
+/* Seção do Vídeo de Pitch */
+.pitch-video-section {
+    padding: 60px 10%;
+    background: #f4f4f4; /* Fundo cinza claro para destacar do escuro dos investidores */
+    text-align: center;
+}
+.video-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    padding-bottom: 56.25%; /* Proporção 16:9 */
+    height: 0;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    border: 3px solid #D4AF37; /* Moldura dourada para combinar com a marca */
+}
+.video-wrapper iframe, .video-wrapper video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.pitch-subtitle {
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 30px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
     </style>
 </head>
 <body>
@@ -148,7 +181,8 @@
             <a href="#download">Download App</a>
             <a href="#historia">Nossa História</a>
             <a href="#impacto">Impacto Social</a>
-            <a href="#investidores" style="color: #D4AF37;">Investidores</a> 
+            <a href="#investidores" style="color: #D4AF37;">Investidores</a>             
+            <a href="#video">Video</a>
             <a href="#historia">Nossa História</a>
             <a href="#contato">Contato</a>
             <a href="https://wa.me/5564992962999" class="nav-whatsapp" target="_blank">WhatsApp</a>
@@ -242,6 +276,27 @@
         <a href="https://wa.me/5564992962999?text=Olá%20Paulo,%20gostaria%20de%20receber%20o%20Pitch%20Deck%20para%20investimento%20no%20RBA." class="btn-investir">
             SOLICITAR APRESENTAÇÃO PARA INVESTIDORES
         </a>
+    </section>
+    
+    
+    <section class="pitch-video-section" id="video">>
+        <h2 style="color: #2d5a27; font-size: 2.5rem; margin-bottom: 10px;">Assista ao nosso Pitch</h2>
+        <p class="pitch-subtitle">Entenda em 2 minutos como a IArtium está transformando a tecnologia nativa em impacto social real para todo o Brasil.</p>
+        
+        <div class="video-wrapper">
+            <iframe allowfullscreen="" class="BLOG_video_class" height="266" src="https://www.youtube.com/embed/CMd6wG-HKJo" width="320" youtube-src-id="CMd6wG-HKJo"
+                    title="RBA Pitch Deck" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+            </iframe>
+            
+            </div>
+
+        <p style="margin-top: 30px; font-weight: bold; color: #8B6B23;">
+            <span class="asterisk" style="font-size: 1.5rem;">*</span> 
+            Apresentação técnica para Bancas Avaliadoras e Comitês de Investimento (ESG).
+        </p>
     </section>
             
         </blockquote>
