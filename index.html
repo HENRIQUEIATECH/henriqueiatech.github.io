@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="RBA Rádio Brasil Artes - O melhor da música brasileira, Bossa Nova e Sertanejo. Software de alta performance em JAVA por Paulo Salomão.">
+    <meta name="description" content="RBA Rádio Brasil Artes - O melhor da música brasileira, Bossa Nova e Sertanejo. Software de alta performance em JAVA por Paulo Salomão IArtium.">
     <meta name="keywords" content="Rádio, Música Brasileira, Bossa Nova, JAVA, Software, Paulo Salomão">
     <title>Paulo Salomão - RBA Rádio Brasil Artes</title>
+    <meta name="robots" content="index, follow">
     <link rel="icon" type="image/png" href="logo.png">
     <style>
         /* Configurações Gerais */
@@ -116,7 +117,7 @@
 
     <header>
         <div class="logo-area">
-            <img src="logo.png" alt="Logo">
+            <img src="logo.png" alt="Agência criadora de Softwear em JAVA Paulo Salomao e IArtium">
             <h1>Paulo Salomão</h1>
         </div>
         <nav>
@@ -146,7 +147,7 @@
         </div>
         
         <div class="download-container">
-            <img src="icone-app.png" alt="Ícone RBA" class="app-icon">
+            <img src="icone-app.png" alt="Aplicativo RBA Rádio Brasil Artes softwear em JAVA" class="app-icon">
             <div class="download-buttons">
                 <a href="RBA.apk" download="RBA-Radio-Brasil-Artes.apk" class="btn-download btn-android">
                     INSTALAR RBA ANDROID (.APK)
@@ -167,7 +168,7 @@
 
     <section class="banner-grafite">
         <blockquote>
-            <img src="cell1.png" alt="Aplicativo">
+            <img src="cell1.png" alt="Aplicativo RBA Rádio Brasil Artes softwear em JAVA">
             
         </blockquote>
     </section>
@@ -184,11 +185,11 @@
                 <p>Criamos <strong>SoftWear</strong> para todo tipo de necessidade, em alta programação em <strong>JAVA</strong> para aplicativos de estrutura e pequenos e grandes projetos, com design e arte integrados.</p>
                 <p>A estrutura da Empresa está em duas principais bases, a <strong>Paulo Salomão</strong> focada em acessoria de Empreendedorismo para o seu usuário. A <strong>IArtium</strong> totalmente direcionada em Tecnologia.</p>
                 <br>
-                <p>A RBA nasceu do desejo de resgatar e preservar a alma sonora do nosso país. Mais do que uma rádio, somos um museu vivo.</p>
+                <p>A RBA nasceu do desejo de resgatar e preservar a alma sonora do nosso país. Mais do que uma rádio, somos um museu vivo. 
+                O softwear RBA foi projetado sob o conceito de Performance Nativa. Desenvolvido 100% em <strong>JAVA</strong> nativo para garantir leveza e velocidade extrema.</p>
             </div>
             <div>
-                <p>Os aplicativos <strong>RBA</strong> são gratuitos e sempre terá aumentado o repertório de áudios sem a necessidade de baixar outro novo aplicativo.</p> <br>
-                <p></p>O softwear <strong>RBA</strong> foi projetado sob o conceito de Performance Nativa. Desenvolvido 100% em <strong>JAVA</strong> nativo para garantir leveza e velocidade extrema.</p>
+                <p>Os aplicativos RBA são gratuitos e sempre terá aumentado o repertório de áudios sem a necessidade de baixar outro novo aplicativo.</p>
                 <p style="margin-top: 15px;">Desenvolvido com excelência técnica para proporcionar a melhor experiência sonora.</p>
             </div>
         </div>
@@ -213,7 +214,7 @@
     </section>
 
     <footer>
-        <img src="loggofooter.png" alt="Logo">
+        <img src="loggofooter.png" alt="Agência criadora de Softwear em JAVA Paulo Salomao e IArtium e Aplicativo RBA">
         <p>Direitos Autorais &copy; 2026 Paulo Salomão Agência de Criadores de Softwears em JAVA</p>
         <p>RBA Rádio Brasil Arte</p>
         <p>IArtium technology | iartium.com </p>
@@ -246,13 +247,34 @@
         }
     </script>
 <script>
-    fetch('https://ipapi.co/json/')
-    .then(res => res.json())
-    .then(data => {
-        // Envia o país do visitante para o seu servidor no PythonAnywhere
-        fetch(`https://PAULOCORREA.pythonanywhere.com/registrar?pais=${data.country_name}`);
-    })
-    .catch(err => console.log("Erro ao registrar visita"));
+    (function() {
+        // 1. Identifica o país do visitante (Grátis e rápido)
+        fetch('https://ipapi.co/json/')
+        .then(res => res.json())
+        .then(data => {
+            const pais = data.country_name || "Desconhecido";
+            
+            // 2. Envia para o seu servidor no PythonAnywhere
+            // SUBSTITUA 'SEU_USUARIO' pelo seu nome de usuário do PythonAnywhere
+            fetch(`https://PAULOCORREA.pythonanywhere.com/registrar?pais=${pais}`)
+            .then(response => console.log("Acesso registrado: " + pais))
+            .catch(err => console.error("Erro ao registrar:", err));
+        })
+        .catch(err => console.log("Erro ao identificar localização"));
+    })();
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "url": "https://iartium.com",
+  "name": "Softwear em JAVA",
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+55-64-99296-2999",
+    "contactType": "Customer service"
+  }
+}
 </script>
 </body>
 </html>
