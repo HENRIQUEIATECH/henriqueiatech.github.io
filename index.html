@@ -167,6 +167,53 @@
     margin-left: auto;
     margin-right: auto;
 }
+
+/* Seção Áudio ESG */
+.secao-audio-esg {
+    padding: 80px 10%;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d5a27 100%); /* Verde escuro profissional */
+    color: white;
+    text-align: center;
+    border-top: 4px solid #D4AF37;
+}
+.audio-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 40px;
+    border-radius: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+}
+.esg-badge {
+    background: #D4AF37;
+    color: #1a1a1a;
+    padding: 5px 15px;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+.audio-player-container {
+    margin-top: 30px;
+    background: #fff;
+    border-radius: 50px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+audio {
+    width: 100%;
+    height: 40px;
+}
+.esg-desc {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin: 20px 0;
+    color: #ddd;
+}
     </style>
 </head>
 <body>
@@ -180,7 +227,8 @@
             <a href="#">SoftWear</a>
             <a href="#download">Download App</a>
             <a href="#impacto">Impacto Social</a>
-            <a href="#investidores" style="color: #D4AF37;">Investidores</a>             
+            <a href="#investidores" style="color: #D4AF37;">Investidores</a>
+            <a href="#esg-audio">Audio</a>             
             <a href="#video">Video</a>
             <a href="#historia">Nossa História</a>
             <a href="#contato">Contato</a>
@@ -277,6 +325,26 @@
         </a>
     </section>
     
+    <section class="secao-audio-esg" id="esg-audio">
+        <div class="audio-card">
+            <span class="esg-badge">Impacto ESG & Tecnologia</span>
+            <h2 style="font-size: 2.2rem; margin-top: 15px; color: #D4AF37;">Análise de Viabilidade Social</h2>
+            
+            <p class="esg-desc">
+                Ouça a análise técnica sobre como o <b>RBA Rádio Brasil Artes</b> utiliza a eficiência do Java Nativo para promover a democratização cultural e o suporte à saúde mental em larga escala.
+            </p>              
+
+            <div class="audio-player-container">
+                <audio controls src="https://ia600101.us.archive.org/18/items/iartium.com/R%C3%A1dio_Brasil_Artes_Une_Cultura_e_Inclus%C3%A3o.m4a" controls></audio>
+
+              
+            </div>
+
+            <p style="margin-top: 20px; font-size: 0.9rem; color: #D4AF37;">
+                <b>Tópicos abordados:</b> Governança Social, Inclusão Digital e Eficiência de Dados.
+            </p>
+        </div>
+    </section>
     
     <section class="pitch-video-section" id="video">>
         <h2 style="color: #2d5a27; font-size: 2.5rem; margin-bottom: 10px;">Assista ao nosso Pitch</h2>
@@ -404,5 +472,34 @@
   }
 }
 </script>
+    <script>
+        // 1. Pegar referências para os elementos do HTML
+        const audioPlayer = document.getElementById('audio-player');
+        const playFromStartBtn = document.getElementById('play-from-start');
+        const playFromMinute5Btn = document.getElementById('play-from-minute-5');
+        const playFromMinute10Btn = document.getElementById('play-from-minute-10');
+
+        // 2. Adicionar os "listeners" de evento de clique a cada botão
+        playFromStartBtn.addEventListener('click', () => {
+            playFromSpecificTime(0); // Inicia do segundo 0
+        });
+
+        playFromMinute5Btn.addEventListener('click', () => {
+            const fiveMinutesInSeconds = 5 * 60;
+            playFromSpecificTime(fiveMinutesInSeconds); // Inicia do segundo 300
+        });
+
+        playFromMinute10Btn.addEventListener('click', () => {
+            const tenMinutesInSeconds = 10 * 60;
+            playFromSpecificTime(tenMinutesInSeconds); // Inicia do segundo 600
+        });
+
+        // 3. Função principal para definir o tempo e tocar o áudio
+        function playFromSpecificTime(seconds) {
+            audioPlayer.currentTime = seconds;
+            audioPlayer.play();
+        }
+
+    </script>
 </body>
 </html>
