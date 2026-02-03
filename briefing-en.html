@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strategic Engineering Briefing | IArtium International</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Playfair+Display:wght@700&family=Roboto+Mono:wght@400&display=swap');
+        
+        body { 
+            background-color: #F8F9FA; 
+            color: #0A1A12; 
+            font-family: 'Inter', sans-serif; 
+            line-height: 1.6;
+        }
+
+        .tech-label {
+            font-family: 'Roboto Mono', monospace;
+            color: #D4AF37;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+        }
+
+        .bento-card {
+            background: white;
+            border: 1px solid rgba(0,0,0,0.05);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .bento-card:hover {
+            border-color: #D4AF37;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+        }
+
+        .highlight-text {
+            color: #1A3C2F;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="py-16">
+
+    <main class="max-w-5xl mx-auto px-6">
+        
+        <nav class="mb-16 flex justify-between items-center no-print">
+            <span class="text-xl font-black tracking-tighter text-[#1A3C2F]">IARTIUM</span>
+            <a href="index.html" class="text-[10px] uppercase tracking-widest font-bold border-b border-black">Back to Home</a>
+        </nav>
+
+        <header class="mb-20">
+            <span class="tech-label">System Architecture // Case Report 2026</span>
+            <h1 class="text-6xl font-playfair mt-4 mb-6 text-[#1A3C2F]">Engineering Briefing: <br>Financial Core & Native Ecosystems</h1>
+            <p class="text-xl font-light text-gray-500 max-w-2xl">
+                Strategic approach to high-performance software engineering, specializing in <span class="highlight-text">Native Java</span>, <span class="highlight-text">Financial Streaming</span>, and data sovereignty.
+            </p>
+        </header>
+
+        <div class="grid md:grid-cols-3 gap-6 mb-12">
+            
+            <div class="md:col-span-2 bento-card p-10 rounded-3xl">
+                <span class="tech-label">Capabilities</span>
+                <h3 class="text-2xl font-bold mt-4 mb-4 uppercase tracking-tighter">Native Android & Java Engineering</h3>
+                <p class="text-gray-600 mb-6">
+                    Specialized in building mission-critical applications using <span class="highlight-text">Java (Android SDK)</span>. Our focus is on low-latency processing and direct hardware integration to ensure maximum performance in institutional environments.
+                </p>
+                <div class="flex gap-4">
+                    <span class="bg-gray-100 px-3 py-1 text-[10px] font-mono">Multithreading</span>
+                    <span class="bg-gray-100 px-3 py-1 text-[10px] font-mono">Performance Optimization</span>
+                </div>
+            </div>
+
+            <div class="bento-card p-10 rounded-3xl bg-[#1A3C2F] text-white">
+                <span class="tech-label text-white/50">Connectivity</span>
+                <h3 class="text-2xl font-bold mt-4 mb-4">PWA & WebSocket</h3>
+                <p class="text-sm text-white/70">
+                    Implementing robust <span class="text-[#D4AF37]">PWA</span> engines for iOS and Web, utilizing WebSockets for real-time financial data streaming and remote terminal access.
+                </p>
+            </div>
+
+            <div class="bento-card p-10 rounded-3xl">
+                <span class="tech-label">Expertise</span>
+                <h3 class="text-xl font-bold mt-4 mb-2 tracking-tight uppercase">Data Streaming Intelligence</h3>
+                <p class="text-xs text-gray-500 mb-6 italic">Integration of high-value terminal data (API-driven) into secure browser-based environments.</p>
+                <ul class="text-[10px] space-y-2 font-bold uppercase tracking-widest">
+                    <li class="flex items-center"><span class="w-1.5 h-1.5 bg-[#D4AF37] mr-2"></span>Secure Auth (SSO/OAuth)</li>
+                    <li class="flex items-center"><span class="w-1.5 h-1.5 bg-[#D4AF37] mr-2"></span>SSH over HTTP Protocol</li>
+                    <li class="flex items-center"><span class="w-1.5 h-1.5 bg-[#D4AF37] mr-2"></span>Institutional Compliance</li>
+                </ul>
+            </div>
+
+            <div class="md:col-span-2 bento-card p-10 rounded-3xl border-dashed border-2">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <span class="tech-label text-green-700">ESG Compliance</span>
+                        <h3 class="text-xl font-bold mt-4 mb-2 uppercase">Sustainability in Tech</h3>
+                        <p class="text-sm text-gray-500">Aligned with <span class="highlight-text">United Nations Goals (2030)</span>, our "Green-Code" methodology reduces server-side energy consumption while promoting digital inclusion through our media engine (RBA).</p>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-xl border">
+                        <span class="text-xs font-mono font-bold">UN-ODS Aligned</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <footer class="mt-20 border-t pt-10 flex flex-col md:flex-row justify-between items-center gap-8">
+            <div class="text-center md:text-left">
+                <p class="text-[10px] font-mono uppercase tracking-[0.4em] opacity-40">Intelligence for a new era</p>
+                <p class="text-sm font-semibold">IArtium International Engineering</p>
+            </div>
+            <a href="https://wa.me/5564992962999?text=Hello,%20I'm%20contacting%20regarding%20the%20IArtium%20Engineering%20Briefing." 
+               class="bg-black text-white px-10 py-4 text-[10px] font-bold uppercase tracking-[0.2em] rounded-full hover:bg-[#D4AF37] hover:text-black transition">
+                Request Interview / Briefing
+            </a>
+        </footer>
+
+    </main>
+
+</body>
+</html>
