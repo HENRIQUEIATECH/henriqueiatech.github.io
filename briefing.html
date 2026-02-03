@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing Estratégico | IArtium International</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Playfair+Display:wght@700&family=Roboto+Mono:wght@400&display=swap');
+        
+        body { 
+            background-color: #F4F7F5; 
+            color: #1A3C2F; 
+            font-family: 'Inter', sans-serif; 
+            line-height: 1.6;
+        }
+
+        .section-number {
+            font-family: 'Roboto Mono', monospace;
+            color: #D4AF37;
+            font-weight: bold;
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+        }
+
+        .card-briefing {
+            background: white;
+            border-left: 4px solid #1A3C2F;
+            transition: all 0.3s ease;
+        }
+
+        .card-briefing:hover {
+            border-left-color: #D4AF37;
+            transform: translateX(10px);
+        }
+
+        .gold-gradient {
+            background: linear-gradient(135deg, #D4AF37 0%, #B8860B 100%);
+        }
+
+        @media print {
+            .no-print { display: none; }
+            body { background: white; }
+        }
+    </style>
+</head>
+<body class="py-12 px-6">
+
+    <header class="max-w-4xl mx-auto mb-20 border-b border-black/10 pb-10 flex justify-between items-end">
+        <div>
+            <span class="section-number uppercase mb-2 block">Documento de Engenharia v2.6</span>
+            <h1 class="text-5xl font-playfair text-[#1A3C2F]">Briefing Estratégico</h1>
+            <p class="text-gray-500 mt-4 uppercase tracking-[0.3em] text-[10px] font-bold">IArtium International Tech Intelligence</p>
+        </div>
+        <div class="text-right no-print">
+            <button onclick="window.print()" class="text-[10px] font-mono border border-black/20 px-4 py-2 hover:bg-black hover:text-white transition">PDF_DOWNLOAD</button>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto">
+        
+        <section class="mb-20">
+            <p class="text-2xl font-light text-gray-600 leading-relaxed">
+                A <span class="text-[#1A3C2F] font-semibold text-3xl font-playfair">IArtium</span> atua na intersecção entre alta engenharia de software e soberania institucional, provendo infraestrutura crítica para o sistema financeiro global e multinacionais de alto impacto.
+            </p>
+        </section>
+
+        <div class="mb-12">
+            <span class="section-number">01. FINANCIAL INFRASTRUCTURE</span>
+            <div class="card-briefing p-8 mt-4 shadow-sm">
+                <h3 class="text-xl font-bold mb-4 uppercase tracking-tight">Sistemas Bancários Soberanos</h3>
+                <p class="text-gray-600 text-sm mb-6">Desenvolvemos nós geográficos independentes (Nodes) em jurisdições estratégicas. Nossa engenharia permite que bancos privados e holdings operem com blindagem digital absoluta e custódia tecnológica proprietária.</p>
+                <ul class="text-[11px] font-mono text-[#D4AF37] space-y-1">
+                    <li>> MULTI-NODE DEPLOYMENT (NY/CH/BR)</li>
+                    <li>> QUANTUM-RESISTANT ENCRYPTION</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="mb-12">
+            <span class="section-number">02. ENTERPRISE SOFTWARE</span>
+            <div class="card-briefing p-8 mt-4 shadow-sm">
+                <h3 class="text-xl font-bold mb-4 uppercase tracking-tight">Engenharia Nativa & Escala</h3>
+                <p class="text-gray-600 text-sm mb-4">Construímos ecossistemas digitais que não dependem de terceiros. Soluções focadas em multinacionais que exigem exclusividade e performance.</p>
+                <div class="grid grid-cols-2 gap-4 mt-6">
+                    <div class="bg-gray-50 p-4 border border-gray-100">
+                        <span class="block text-[10px] font-bold text-[#1A3C2F]">ANDROID</span>
+                        <span class="text-xs text-gray-500 italic">Java Nativo de Alta Performance</span>
+                    </div>
+                    <div class="bg-gray-50 p-4 border border-gray-100">
+                        <span class="block text-[10px] font-bold text-[#1A3C2F]">iOS / WEB</span>
+                        <span class="text-xs text-gray-500 italic">PWA Engine (Sovereign Install)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-20">
+            <span class="section-number">03. ESG & IMPACT (UN GOALS)</span>
+            <div class="card-briefing p-8 mt-4 shadow-sm bg-[#1A3C2F] text-white border-none">
+                <h3 class="text-xl font-playfair mb-4 text-[#D4AF37]">Rádio Brasil Artes (RBA)</h3>
+                <p class="text-sm opacity-80 mb-6 font-light leading-relaxed">
+                    O Case RBA exemplifica nossa capacidade de unir tecnologia de streaming e impacto social. Alinhado aos Objetivos de Desenvolvimento Sustentável da ONU, o projeto utiliza infraestrutura de baixo consumo e democratização cultural.
+                </p>
+                <div class="inline-block border border-[#D4AF37]/30 px-4 py-2 rounded text-[9px] font-mono">
+                    #AGENDA_2030_ALIGNED
+                </div>
+            </div>
+        </div>
+
+        <section class="text-center py-16 bg-white rounded-3xl shadow-xl border border-gray-100">
+            <h2 class="text-3xl font-playfair mb-4">Inicie seu Briefing Técnico</h2>
+            <p class="text-gray-500 text-sm mb-10 max-w-md mx-auto">Para assessoria em infraestrutura financeira ou desenvolvimento de plataformas institucionais.</p>
+            
+            <a href="https://wa.me/5564992962999?text=Solicito%20um%20briefing%20estratégico%20sobre%20as%20soluções%20de%20engenharia%20da%20IArtium." 
+               class="gold-gradient text-white px-12 py-5 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] shadow-lg hover:shadow-2xl transition-all">
+                Conectar com Engenharia
+            </a>
+        </section>
+
+    </main>
+
+    <footer class="max-w-4xl mx-auto mt-24 text-center border-t border-black/5 pt-12">
+        <p class="text-[10px] font-mono text-gray-400 uppercase tracking-widest">
+            IArtium International Intelligence // Switzerland - USA - Brazil
+        </p>
+    </footer>
+
+</body>
+</html>
