@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IArtium S-4 | Strategy</title>
+    <style>
+        :root {
+            --grafite: #374151;
+            --grafite-claro: #9ca3af;
+            --grafite-medio: #374151;
+            --grafite-verde: #02c202;
+            --borda: #d9dbde;
+        }
+        body {
+            background-color: #ffffff;
+            color: var(--grafite);
+            font-family: -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
+            margin: 0; padding: 0;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        header {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 30px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo { 
+            color: var(--grafite-verde); 
+            font-weight: 500; 
+            font-size: 0.95em; 
+            letter-spacing: 2px; 
+            text-transform: uppercase;
+        }
+        nav a { 
+            color: var(--grafite-medio); 
+            text-decoration: none; 
+            margin-left: 20px; 
+            font-size: 0.7em; 
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .hero { 
+            text-align: center; 
+            padding: 50px 20px 10px; 
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        .hero h1 { 
+            font-size: 1.1em; 
+            font-weight: 300; 
+            margin: 0; 
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+        .hero p { 
+            font-size: 0.7em; 
+            color: var(--grafite-claro); 
+            margin-top: 8px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* Gráfico Central */
+        .chart-container {
+            max-width: 800px;
+            margin: 0 auto 30px;
+            padding: 30px 20px;
+            text-align: center;
+        }
+        .chart-wrapper {
+            height: 160px;
+            border-bottom: 1px solid var(--borda);
+            border-left: 1px solid var(--borda);
+            position: relative;
+        }
+        .line-svg { width: 100%; height: 100%; }
+
+        /* Pontos e Pulso */
+        .point { position: absolute; width: 8px; height: 8px; border-radius: 50%; transform: translate(-50%, 50%); z-index: 5; }
+        .point.current { bottom: 30%; left: 30%; background: #ddd; }
+        .point.target { bottom: 85%; left: 90%; background: var(--grafite); }
+        .pulse { width: 8px; height: 8px; background: var(--grafite-verde); border-radius: 50%; animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0px rgba(55,65,81,0.4); } 100% { box-shadow: 0 0 0 12px rgba(55,65,81,0); } }
+
+        .label {
+            position: absolute;
+            font-size: 8px;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: var(--grafite-claro);
+            white-space: nowrap;
+            letter-spacing: 1px;
+        }
+
+        /* Grid de 6 Botões/Cards */
+        .grid-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 12px;
+            padding: 0 20px 60px;
+        }
+        .card {
+            border: 1px solid var(--borda);
+            border-radius: 8px;
+            padding: 18px;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: inherit;
+            transition: 0.2s ease;
+        }
+        .card:hover { 
+            border-color: var(--grafite); 
+            background: #fafafa;
+            transform: translateY(-1px);
+        }
+        .icon-box {
+            width: 30px; height: 30px; background: #f9fafb; border: 1px solid var(--borda);
+            border-radius: 6px; margin-right: 15px; flex-shrink: 0;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 600; font-size: 0.7em; color: var(--grafite);
+        }
+        .card-content strong { display: block; font-size: 0.75em; font-weight: 600; margin-bottom: 2px; letter-spacing: 0.5px; }
+        .card-content span { color: var(--grafite-claro); font-size: 0.65em; line-height: 1.3; }
+
+        footer { text-align: center; padding: 40px; font-size: 0.6em; color: var(--rafite-medio); letter-spacing: 2px; text-transform: uppercase; }
+        
+        .icon-box {
+    width: 35px;           /* Tamanho fixo do container */
+    height: 35px;
+    background: #f9fafb;
+    border: 1px solid var(--borda);
+    border-radius: 6px;
+    margin-right: 15px;
+    flex-shrink: 0;
+    display: flex;         /* Centraliza a imagem horizontal e verticalmente */
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;      /* Garante que nada saia do quadrado */
+}
+
+.icon-img {
+    max-width: 35px;      /* Limita a largura para sobrar respiro */
+    max-height: 35px;     /* Limita a altura */
+    width: auto;
+    height: auto;
+    object-fit: contain;  /* Mantém a proporção sem distorcer */
+    filter: grayscale(100%);
+    opacity: 0.8;
+}
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo"><b>IARTIUM</b></div>
+    <nav>
+        <a href="https://iartium.com/index2.html">Software</a>
+        <a href="https://iartium.com/index2.html">Análises</a>
+        <a href="https://iartium.com/paulodoporto">Consultoria</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <h1>IARTIUM Solution</h1>
+    <p>Architecture of Sovereignty & Value</p>
+</section>
+
+<div class="chart-container">
+    <div class="chart-wrapper">
+        <svg viewBox="0 0 500 200" preserveAspectRatio="none" class="line-svg">
+            <path d="M0,170 Q150,180 250,120 T500,40" fill="none" stroke="#374151" stroke-width="1" />
+        </svg>
+        <div class="point current">
+            <span class="label" style="bottom: 15px; left: -20px; color: #ccc;">Gap 50%</span>
+        </div>
+        <div class="point target">
+            <div class="pulse"></div>
+            <span class="label" style="bottom: 20px; left: -40px; color: var(--grafite);">IARTIUM Solution</span>
+        </div>
+    </div>
+</div>
+
+<div class="grid-container">
+<a href="https://iartium.com/solution" class="card">
+    <div class="icon-box">
+        <img src="raiz4.png" alt="Raízen Logo" class="icon-img">
+    </div>
+    <div class="card-content">
+        <strong>RAÍZEN (RAIZ4)</strong>
+        <span>Gap de Eficiência & Turnaround Digital.</span>
+    </div>
+</a>
+
+    <a href="https://iartium.com/solution" class="card">
+        <div class="icon-box">
+        <img src="g20.png" alt="G20 Logo" class="icon-img">
+    </div>
+        <div class="card-content">
+            <strong>G20 / REGULAMENTO</strong>
+            <span>Soberania Digital e Ordem Global.</span>
+        </div>
+    </a>
+
+    <a href="https://iartium.com/ny" class="card">
+        <div class="icon-box">
+        <img src="finan.png" alt="Financeira Logo" class="icon-img">
+    </div>
+        <div class="card-content">
+            <strong>ESTRUTURAS FINANCEIRAS</strong>
+            <span>Liquidez e Auditoria de Dados Bancários.</span>
+        </div>
+    </a>
+
+    <a href="https://iartium.com/global" class="card">
+        <div class="icon-box">
+        <img src="bank.png" alt="Global Bank" class="icon-img">
+    </div>
+        <div class="card-content">
+            <strong>NY • CH • BR • GLOBAL</strong>
+            <span>Eixos Geopolíticos e Estratégia de Mercado.</span>
+        </div>
+    </a>
+
+    <a href="https://iartium.com/rba" class="card">
+        <div class="icon-box">
+        <img src="rba.png" alt="Radio RBA" class="icon-img">
+    </div>
+        <div class="card-content">
+            <strong>RBA ESG</strong>
+            <span>Sustentabilidade e Governança Sistêmica.</span>
+        </div>
+    </a>
+
+    <a href="https://iartium.com/chemin" class="card" target="_blank">
+        <div class="icon-box">
+        <img src="logo-22.png" alt="Radio Chemin" class="icon-img">
+    </div>
+        <div class="card-content">
+            <strong>RADIO CHEMIN</strong>
+            <span>Clássicos, Filosofia e Harmonia Digital.</span>
+        </div>
+    </a>
+</div>
+
+<footer>&copy; 2026 IARTIUM Solution S-4 STRATEGIC UNIT</footer>
+
+</body>
+</html>
