@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rosa dos Ventos</title>
+    <style>
+        /* Estilo Clássico e Limpo */
+        body {
+            font-family: 'Georgia', serif;
+            background-color: #ffffff;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+        }
+
+        .container {
+            border: 1px solid #ccc;
+            padding: 40px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            max-width: 400px;
+        }
+
+        h1 {
+            font-variant: small-caps;
+            letter-spacing: 2px;
+            border-bottom: 2px solid #333;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+
+        .coordenadas {
+            font-size: 1.2rem;
+            margin: 20px 0;
+        }
+
+        .label {
+            font-weight: bold;
+            color: #555;
+        }
+
+        button {
+            background-color: #333;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-family: 'Georgia', serif;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background-color: #555;
+        }
+
+        #mensagem {
+            margin-top: 15px;
+            font-style: italic;
+            font-size: 0.9rem;
+            color: #d9534f;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Rosa dos Ventos</h1>
+        
+        <div class="coordenadas">
+            <p><span class="label">Latitude:</span> <span id="lat">---</span></p>
+            <p><span class="label">Longitude:</span> <span id="lng">---</span></p>
+        </div>
+
+        <button onclick="buscarLocalizacao()">Localizar meu Dispositivo</button>
+        
+        <p id="mensagem"></p>
+    </div>
+
+    <script>
+        function buscarLocalizacao() {
+            const latDisplay = document.getElementById('lat');
+            const lngDisplay = document.getElementById('lng');
+            const msg = document.getElementById('mensagem');
+
+            msg.textContent = "Solicitando acesso...";
+
+            // Verifica se o navegador suporta geolocalização
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    // Sucesso
+                    (posicao) => {
+                        latDisplay.textContent = posicao.coords.latitude.toFixed(6);
+                        lngDisplay.textContent = posicao.coords.longitude.toFixed(6);
+                        msg.style.color = "green";
+                        msg.textContent = "Localização encontrada com sucesso.";
+                    },
+                    // Erro
+                    (erro) => {
+                        msg.style.color = "#d9534f";
+                        switch(erro.code) {
+                            case erro.PERMISSION_DENIED:
+                                msg.textContent = "Usuário negou a permissão de localização.";
+                                break;
+                            case erro.POSITION_UNAVAILABLE:
+                                msg.textContent = "Informações de localização indisponíveis.";
+                                break;
+                            case erro.TIMEOUT:
+                                msg.textContent = "A requisição expirou.";
+                                break;
+                            default:
+                                msg.textContent = "Ocorreu um erro desconhecido.";
+                        }
+                    }
+                );
+            } else {
+                msg.textContent = "Seu navegador não suporta geolocalização.";
+            }
+        }
+    </script>
+</body>
+</html>
