@@ -1,0 +1,448 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IArtium com | Solution Architecture</title>
+    <style>
+        :root {
+            --grafite: #374151;
+            --grafite-claro: #9ca3af;
+            --grafite-medio: #4b5563;
+            --grafite-verde: #02c202;
+            --borda: #d9dbde;
+            --accent-gold: #c5a059;
+        }
+        body {
+            background-color: #ffffff;
+            color: var(--grafite);
+            font-family: -apple-system, BlinkMacSystemFont, "Inter", "Helvetica Neue", sans-serif;
+            margin: 0; padding: 0;
+            -webkit-font-smoothing: antialiased;
+            /* Space compensation due to fixed header */
+            padding-top: 85px; 
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-bottom: 1px solid rgba(217, 219, 222, 0.5);
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+        }
+        .header-container {
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo { 
+            color: var(--grafite-verde); 
+            font-weight: 500; 
+            font-size: 0.95em; 
+            letter-spacing: 2px; 
+            text-transform: uppercase;
+        }
+        nav a { 
+            color: var(--grafite-medio); 
+            text-decoration: none; 
+            margin-left: 20px; 
+            font-size: 0.7em; 
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        nav a:hover {
+            color: var(--grafite);
+            border-bottom: 1px solid var(--grafite);
+        }
+        .lang-separator {
+            color: var(--grafite-claro);
+            margin: 0 5px 0 15px;
+            font-size: 0.7em;
+        }
+
+        /* Top Hero Section with Full PNG Background */
+        .hero-section-bg {
+            position: relative;
+            background-image: url('https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D.png'); 
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            padding: 120px 20px;
+            text-align: center;
+        }
+        /* Gradient Mask: 100% White at Top fading to 0% at Bottom */
+        .hero-section-bg::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
+            z-index: 1;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .hero-content h1 {
+            font-size: 1.8em;
+            font-weight: 300;
+            margin: 0 0 15px 0;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: #111827;
+        }
+        .hero-content p {
+            font-size: 0.9em;
+            color: var(--grafite-medio);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Symmetric Unified 3x2 Grid */
+        .solutions-grid-section {
+            max-width: 1000px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+        @media (max-width: 768px) {
+            .grid-container { grid-template-columns: 1fr; }
+        }
+
+        .card-solution {
+            border: 1px solid var(--borda);
+            border-radius: 8px;
+            padding: 26px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            background: #ffffff;
+        }
+        .icon-box {
+            width: 42px; height: 42px;
+            border: 1px solid var(--borda);
+            border-radius: 6px;
+            margin-bottom: 18px;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .icon-symbol {
+            color: var(--grafite-verde); 
+            font-size: 1.3em;
+            font-weight: bold;
+        }
+        .card-content h3 {
+            font-size: 0.9em;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #111827;
+            margin: 0 0 6px 0;
+        }
+        .card-content p {
+            font-size: 0.72em;
+            color: var(--grafite-medio);
+            line-height: 1.4;
+            margin: 0;
+        }
+
+        /* Second Section with Full PNG Background and Slogan */
+        .slogan-section-bg {
+            position: relative;
+            background-image: url('https://images.unsplash.com/photo-1506787497326-c2736dde1bef?q=80&w=1892&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D.png'); 
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            padding: 100px 20px;
+            text-align: center;
+        }
+        .slogan-content {
+            position: relative;
+            z-index: 2;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        .slogan-content h2 {
+            font-size: 1.3em;
+            font-weight: 400;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #111827;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Gallery Section: Squares with Links */
+        .gallery-section {
+            max-width: 1000px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        @media (max-width: 768px) {
+            .gallery-container { grid-template-columns: 1fr; }
+        }
+
+        .card {
+            border: 1px solid var(--borda);
+            border-radius: 8px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column; 
+            align-items: flex-start;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.2s ease;
+            background: #ffffff;
+            position: relative;
+        }
+        .card:hover { 
+            border-color: var(--grafite); 
+            background: #fafafa;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.03);
+        }
+        
+        .icon-img {
+            max-width: 24px;
+            max-height: 24px;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            filter: grayscale(100%) brightness(40%); 
+            opacity: 0.9;
+        }
+        
+        .card-content {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .card-content .theme-title {
+            font-size: 0.65em;
+            font-weight: 500;
+            color: var(--grafite-claro);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+        .card-content strong { 
+            display: block; 
+            font-size: 0.85em; 
+            font-weight: 600; 
+            margin-bottom: 6px; 
+            letter-spacing: 0.5px; 
+            color: #111827;
+        }
+        .card-content span { 
+            color: var(--grafite-medio); 
+            font-size: 0.7em; 
+            line-height: 1.4; 
+        }
+        
+                /* Botão de Ação Centralizado */
+        .cta-container {
+            text-align: center;
+            margin: 40px auto 30px;
+            max-width: 1000px;
+            padding: 0 20px;
+        }
+        .btn-cta {
+            display: inline-block;
+            background-color: var(--grafite);
+            color: #ffffff;
+            text-decoration: none;
+            padding: 15px 45px;
+            font-size: 0.8em;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            border: 1px solid var(--grafite);
+        }
+        .btn-cta:hover {
+            background-color: #ffffff;
+            color: var(--grafite);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        footer { 
+            border-top: 1px solid #f3f4f6;
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            padding: 60px 20px; 
+            gap: 15px; 
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-container">
+        <div class="logo"><b>IARTIUM com</b></div>
+        <nav>
+            <a href="https://iartium.com/en/software.html">Software</a>
+            <a href="https://iartium.com/en/analysis.html">Analysis</a>
+            <a href="https://iartium.com/paulosalomao">Consulting</a>
+            <span class="lang-separator">|</span>
+            <a href="https://iartium.com/pt.html">Português</a>
+            <a href="https://iartium.com/en.html" style="margin-left: 10px;">English</a>
+        </nav>
+    </div>
+</header>
+
+<section class="hero-section-bg">
+    <div class="hero-content">
+        <h1>IARTIUM com — SOLUTION ARCHITECTURE</h1>
+        <p>An analytical and structural response guided by the philosophy of computer science</p>
+    </div>
+</section>
+
+<section class="solutions-grid-section">
+    <div class="grid-container">
+
+        <div class="card-solution">
+            <div class="icon-box"><span class="icon-symbol">★</span></div>
+            <div class="card-content">
+                <h3>Software Development</h3>
+                <p>Analytical Scalability and Low-Level Engineering directly on Silicon</p>
+            </div>
+        </div>
+
+        <div class="card-solution">
+            <div class="icon-box"><span class="icon-symbol">★</span></div>
+            <div class="card-content">
+                <h3>Application Development</h3>
+                <p>Universal Interfaces and High-Performance Mobile Experiences</p>
+            </div>
+        </div>
+
+        <div class="card-solution">
+            <div class="icon-box"><span class="icon-symbol">★</span></div>
+            <div class="card-content">
+                <h3>Website Development</h3>
+                <p>Authentic Platforms, Systemic Governance, and Web Ecosystems</p>
+            </div>
+        </div>
+
+        <div class="card-solution">
+            <div class="icon-box"><span class="icon-symbol">★</span></div>
+            <div class="card-content">
+                <h3>Security Development</h3>
+                <p>Infrastructure Protection, Provenance Filters, and Geopolitical Strategy</p>
+            </div>
+        </div>
+
+        <div class="card-solution">
+            <div class="icon-box"><span class="icon-symbol">★</span></div>
+            <div class="card-content">
+                <h3>Sovereign Systems</h3>
+                <p>Complete removal of redundancies and technical debt from legacy software</p>
+            </div>
+        </div>
+
+        <div class="card-solution">
+            <div class="icon-box"><span class="icon-symbol">★</span></div>
+            <div class="card-content">
+                <h3>Strategic Consulting</h3>
+                <p>Pure diagnoses conducted directly by Paulo Salomão</p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section class="slogan-section-bg">
+    <div class="slogan-content">
+        <h2>"Solid architecture generates perpetual value and paves the way for good business."</h2>
+    </div>
+</section>
+
+<section class="gallery-section">
+    <div class="gallery-container">
+        
+        <a href="https://iartium.com/global" class="card">
+            <div class="icon-box">
+                <img src="bank.png" alt="Global Bank" class="icon-img">
+            </div>
+            <div class="card-content">
+                <div class="theme-title">Security Development</div>
+                <strong>NY • CH • BR • GLOBAL</strong>
+                <span>Deep analysis of geopolitical axes and strategic shielding of mercantile assets.</span>
+            </div>
+        </a>
+
+        <a href="https://iartium.com/rba" class="card">
+            <div class="icon-box">
+                <img src="rba.png" alt="Radio RBA" class="icon-img">
+            </div>
+            <div class="card-content">
+                <div class="theme-title">Website Development</div>
+                <strong>RBA Rádio Brasil Artes</strong>
+                <span>Digital sustainability, systemic governance, and high-value corporate portals.</span>
+            </div>
+        </a>
+
+        <a href="https://iartium.com/chemin" class="card" target="_blank">
+            <div class="icon-box">
+                <img src="logo-22.png" alt="Radio Chemin" class="icon-img">
+            </div>
+            <div class="card-content">
+                <div class="theme-title">Website Development</div>
+                <strong>RADIO CHEMIN</strong>
+                <span>Preservation of classics, foundational philosophy, and web traffic harmony.</span>
+            </div>
+        </a>
+
+    </div>
+</section>
+
+<div class="cta-container">
+    <a href="https://iartium.com/paulosalomao" class="btn-cta">Talk to iartium.com</a>
+</div>
+
+<footer>
+    <div style="font-size: 1.1em; font-weight: 500; letter-spacing: 3px; color: var(--grafite);">
+        SOFTWARE • ANALYSIS • CONSULTING
+    </div>
+
+    <div style="font-size: 0.75em; letter-spacing: 2px; color: var(--grafite-medio); font-weight: 600; margin-top: 5px;">
+        PAULO SALOMÃO — PHILOSOPHER OF COMPUTER SCIENCE
+    </div>
+
+    <div style="font-size: 0.65em; letter-spacing: 3px; color: var(--grafite-claro); margin-top: 10px;">
+        AI SOLUTION ARCHITECTURE • SOVEREIGN SYSTEMS<br>
+        &copy; 2026 IARTIUM com - ALL RIGHTS RESERVED
+    </div>
+            <iframe src="https://visualizar-iartium.blogspot.com/p/index-iartium.html" width="1" height="1" title="Iartium"></iframe>
+</footer>
+
+</body>
+</html>
